@@ -1,32 +1,77 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <v-app>
+    <div class="d-flex justify-lg-space-between full-height">
+      <v-navigation-drawer
+        class="col-3"
+        permanent
+      >
+        <bar-filter></bar-filter>
+      </v-navigation-drawer>
+      <div class="main col-9">
+        <v-container fluid>
+          <div class="d-flex justify-center flex-wrap">
+            <card-product
+              v-for="product of products"
+              :key="product.id"
+              :name="product.name"
+              :price="product.price"
+              :text="product.text"
+            ></card-product>
+          </div>
+        </v-container>
+      </div>
     </div>
-    <router-view/>
-  </div>
+    <v-footer padless>
+      <v-col
+        class="text-center"
+        cols="12"
+      >
+        <new-product></new-product>
+      </v-col>
+    </v-footer>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import NewProduct from './components/NewProduct'
+import Filter from './components/Filter'
+import Card from './components/Card'
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  components: {
+    newProduct: NewProduct,
+    barFilter: Filter,
+    cardProduct: Card
+  },
+  data () {
+    return {
+      drawer: true,
+      products: [
+        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '44456546546' },
+        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '23456546546' },
+        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43456546546' },
+        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43186546546' },
+        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43236546546' },
+        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43236541546' },
+        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43236546246' },
+        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43236546536' },
+        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43236546544' },
+        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43456534546' }
+      ]
     }
   }
+
 }
+</script>
+<style lang="scss">
+  html {
+    overflow: hidden;
+  }
+  .full-height{
+    height: calc(100vh - 332px);
+  }
+  .main {
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 </style>
