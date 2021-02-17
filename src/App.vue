@@ -11,7 +11,7 @@
         <v-container fluid>
           <div class="d-flex justify-center flex-wrap">
             <card-product
-              v-for="product of products"
+              v-for="product of products1"
               :key="product.id"
               :name="product.name"
               :price="product.price"
@@ -46,21 +46,70 @@ export default {
   data () {
     return {
       drawer: true,
-      products: [
-        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '44456546546' },
-        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '23456546546' },
-        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43456546546' },
-        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43186546546' },
-        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43236546546' },
-        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43236541546' },
-        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43236546246' },
-        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43236546536' },
-        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43236546544' },
-        { name: 'Phone', price: '9999', text: 'Greyhound divisely hello coldly fonwderfully', id: '43456534546' }
+      products1: [
+        {
+          name: 'Phone',
+          price: '9999',
+          text: 'Greyhound divisely hello coldly fonwderfully',
+          id: '44456546546'
+        },
+        {
+          name: 'Phone',
+          price: '9999',
+          text: 'Greyhound divisely hello coldly fonwderfully',
+          id: '23456546546'
+        },
+        {
+          name: 'Phone',
+          price: '9999',
+          text: 'Greyhound divisely hello coldly fonwderfully',
+          id: '43456546546'
+        },
+        {
+          name: 'Phone',
+          price: '9999',
+          text: 'Greyhound divisely hello coldly fonwderfully',
+          id: '43186546546'
+        },
+        {
+          name: 'Phone',
+          price: '9999',
+          text: 'Greyhound divisely hello coldly fonwderfully',
+          id: '43236546546'
+        },
+        {
+          name: 'Phone',
+          price: '9999',
+          text: 'Greyhound divisely hello coldly fonwderfully',
+          id: '43236541546'
+        },
+        {
+          name: 'Phone',
+          price: '9999',
+          text: 'Greyhound divisely hello coldly fonwderfully',
+          id: '43236546246'
+        },
+        {
+          name: 'Phone',
+          price: '9999',
+          text: 'Greyhound divisely hello coldly fonwderfully',
+          id: '43236546536'
+        },
+        {
+          name: 'Phone',
+          price: '9999',
+          text: 'Greyhound divisely hello coldly fonwderfully',
+          id: '43236546544'
+        },
+        {
+          name: 'Phone',
+          price: '9999',
+          text: 'Greyhound divisely hello coldly fonwderfully',
+          id: '43456534546'
+        }
       ]
     }
   }
-
 }
 </script>
 <style lang="scss">
