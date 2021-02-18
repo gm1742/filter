@@ -100,7 +100,7 @@ export default {
           name: this.name,
           price: this.price,
           description: this.description,
-          image: '1.jpg',
+          image: '3.jpg',
           id: Date.now().toString()
         }
         this.$store.dispatch('createProduct', product)

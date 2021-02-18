@@ -84,7 +84,7 @@ export default {
         to: this.to,
         from: this.from
       }
-      this.$store.dispatch('to', result)
+      this.$store.dispatch('fromTo', result)
     },
     sortUsd () {
       if (!this.radios) {

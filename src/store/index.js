@@ -9,14 +9,14 @@ const exchangeRate = 30
 export default new Vuex.Store({
   state: {
     products: json.products,
-    currency: 'UAN',
-    cureen: {
+    currencyText: 'UAN',
+    currency: {
       uan: true,
       usd: false
     }
   },
   mutations: {
-    to (state, payload) {
+    fromTo (state, payload) {
       var mass = []
       json.products.map(p => {
         if (payload.from <= p.price && p.price <= payload.to) {
@@ -30,18 +30,18 @@ export default new Vuex.Store({
       state.products.push(payload)
     },
     usd (state, payload) {
-      state.currency = payload
-      state.cureen.uan = false
-      state.cureen.usd = true
+      state.currencyText = payload
+      state.currency.uan = false
+      state.currency.usd = true
       return state.products.forEach(p => {
         const result = p.price / exchangeRate
         p.price = result
       })
     },
     uan (state, payload) {
-      state.currency = payload
-      state.cureen.uan = true
-      state.cureen.usd = false
+      state.currencyText = payload
+      state.currency.uan = true
+      state.currency.usd = false
       return state.products.forEach(p => {
         const result = p.price * exchangeRate
         p.price = result
@@ -66,8 +66,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    to ({ commit }, payload) {
-      commit('to', payload)
+    fromTo ({ commit }, payload) {
+      commit('fromTo', payload)
     },
     createProduct ({ commit }, payload) {
       commit('createProduct', payload)
@@ -93,7 +93,7 @@ export default new Vuex.Store({
       return state.products
     },
     currency (state) {
-      return state.currency
+      return state.currencyText
     }
   }
 })
