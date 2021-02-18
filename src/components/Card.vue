@@ -1,35 +1,53 @@
 <template>
-  <v-card
-    class="col-5 mr-2 ml-2 mb-3"
-    outlined
+  <v-col
+    cols="6"
   >
-    <v-list-item three-line>
-      <v-list-item-avatar
-        tile
-        size="80"
-        color="grey"
-      ></v-list-item-avatar>
-      <v-list-item-content>
-        <v-list-item-title class="headline">
-          {{name}}
-        </v-list-item-title>
-        <div class="overline mb-2">
-          {{price}} UAN
-        </div>
-        <v-list-item-subtitle>{{text}}</v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
-
-  </v-card>
+    <v-card
+      class=" mb-3"
+      max-width="380px"
+      min-width="300px"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-avatar
+          tile
+          size="100"
+          color="white"
+        >
+          <v-img
+            :src="image"
+            contain
+          ></v-img>
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title class="headline">
+            {{name}}
+          </v-list-item-title>
+          <div class="overline mb-2">
+            {{price}} {{currency}}
+          </div>
+          <v-list-item-subtitle>{{text}}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </v-card>
+  </v-col>
 </template>
 
 <script>
 export default {
-  props: ['name', 'price', 'text']
-
+  props: ['name', 'image', 'price', 'text'],
+  computed: {
+    currency () {
+      return this.$store.getters.currency
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .v-application .headline{
+    font-size: 1.2rem !important;
+    font-weight: 500;
+  }
 
 </style>

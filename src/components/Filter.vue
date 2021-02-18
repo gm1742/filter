@@ -11,16 +11,17 @@
           v-model="from"
           type="number"
           label="От"
-          @click:append-outer="this.from = parseInt(this.foo, 10) + 1"
-          @click:prepend="this.from = parseInt(this.from, 10) - 1">
+          @keyup="sortTo"
+        >
         </v-text-field>
         <v-text-field
           class="ml-1"
           v-model="to"
           type="number"
+          max="100"
           label="До"
-          @click:append-outer="this.to = parseInt(this.to, 10) + 1"
-          @click:prepend="this.to = parseInt(this.to, 10) - 1">
+          @keyup="sortTo"
+        >
         </v-text-field>
       </div>
     </div>
@@ -34,10 +35,12 @@
         <v-radio
           :value="false"
           label="UAN"
+          @change="sortUan"
         ></v-radio>
         <v-radio
           :value="true"
           label="USD"
+          @change="sortUsd"
         ></v-radio>
       </v-radio-group>
     </div>
@@ -49,17 +52,18 @@
         mandatory
       >
         <v-radio
+          @change="sortAscending"
           label="По возрастанию цены"
         ></v-radio>
         <v-radio
+          @change="sortDescending"
           label="По убыванию цены"
         ></v-radio>
         <v-radio
+          @change="sortAlphabet"
           label="По алфавиту"
         ></v-radio>
       </v-radio-group>
-
-      {{sort}}
     </div>
   </v-col>
 </template>
@@ -69,9 +73,48 @@ export default {
   data () {
     return {
       from: 0,
-      to: 1,
+      to: 29999,
       radios: null,
       sort: 0
+    }
+  },
+  methods: {
+    sortTo () {
+      const result = {
+        to: this.to,
+        from: this.from
+      }
+      this.$store.dispatch('to', result)
+    },
+    sortUsd () {
+      if (!this.radios) {
+        const currency = 'USD '
+        this.$store.dispatch('usd', currency)
+      }
+    },
+    sortUan () {
+      if (this.radios) {
+        const currency = 'UAN'
+        this.$store.dispatch('uan', currency)
+      }
+    },
+    sortAscending () {
+      this.$store.dispatch('ascending')
+    },
+    sortDescending () {
+      this.$store.dispatch('descending')
+    },
+    sortAlphabet () {
+      this.$store.dispatch('alphabet')
+    }
+  },
+  created () {
+    if (this.sort === 0) {
+      this.$store.dispatch('ascending')
+    } else if (this.sort === 1) {
+      this.$store.dispatch('descending')
+    } else if (this.sort === 2) {
+      this.$store.dispatch('alphabet')
     }
   }
 }

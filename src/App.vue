@@ -9,15 +9,17 @@
       </v-navigation-drawer>
       <div class="main col-9">
         <v-container fluid>
-          <div class="d-flex justify-center flex-wrap">
+          <div class="d-flex justify-space-between flex-wrap" v-if="products.length">
             <card-product
-              v-for="product of products1"
+              v-for="product of products"
               :key="product.id"
               :name="product.name"
-              :price="product.price"
-              :text="product.text"
+              :image="require('./assets/products/' + product.image )"
+              :price="Math.floor(product.price)"
+              :text="product.description"
             ></card-product>
           </div>
+          <div v-else> Нет результатов</div>
         </v-container>
       </div>
     </div>
@@ -45,69 +47,12 @@ export default {
   },
   data () {
     return {
-      drawer: true,
-      products1: [
-        {
-          name: 'Phone',
-          price: '9999',
-          text: 'Greyhound divisely hello coldly fonwderfully',
-          id: '44456546546'
-        },
-        {
-          name: 'Phone',
-          price: '9999',
-          text: 'Greyhound divisely hello coldly fonwderfully',
-          id: '23456546546'
-        },
-        {
-          name: 'Phone',
-          price: '9999',
-          text: 'Greyhound divisely hello coldly fonwderfully',
-          id: '43456546546'
-        },
-        {
-          name: 'Phone',
-          price: '9999',
-          text: 'Greyhound divisely hello coldly fonwderfully',
-          id: '43186546546'
-        },
-        {
-          name: 'Phone',
-          price: '9999',
-          text: 'Greyhound divisely hello coldly fonwderfully',
-          id: '43236546546'
-        },
-        {
-          name: 'Phone',
-          price: '9999',
-          text: 'Greyhound divisely hello coldly fonwderfully',
-          id: '43236541546'
-        },
-        {
-          name: 'Phone',
-          price: '9999',
-          text: 'Greyhound divisely hello coldly fonwderfully',
-          id: '43236546246'
-        },
-        {
-          name: 'Phone',
-          price: '9999',
-          text: 'Greyhound divisely hello coldly fonwderfully',
-          id: '43236546536'
-        },
-        {
-          name: 'Phone',
-          price: '9999',
-          text: 'Greyhound divisely hello coldly fonwderfully',
-          id: '43236546544'
-        },
-        {
-          name: 'Phone',
-          price: '9999',
-          text: 'Greyhound divisely hello coldly fonwderfully',
-          id: '43456534546'
-        }
-      ]
+      drawer: true
+    }
+  },
+  computed: {
+    products () {
+      return this.$store.getters.products
     }
   }
 }
@@ -117,10 +62,31 @@ export default {
     overflow: hidden;
   }
   .full-height{
-    height: calc(100vh - 332px);
+    height: calc(100vh - 299px);
   }
   .main {
     overflow-y: scroll;
     overflow-x: hidden;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield !important;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+  }
+  input[type='number'],
+  input[type="number"]:hover,
+  input[type="number"]:focus {
+    appearance: none !important;
+    -moz-appearance: textfield !important;
+  }
+  .v-application--is-ltr .v-textarea.v-text-field--enclosed .v-text-field__slot textarea{
+    height: 119px;
   }
 </style>

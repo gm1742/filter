@@ -4,7 +4,6 @@
       <v-row>
         <v-col
           cols="12"
-          sm="8"
           xs="12"
           class="ma-auto justify-center"
         >
@@ -13,71 +12,64 @@
               <div class="col-6">
                 <v-text-field
                   filled
-                  v-model="title"
+                  v-model="name"
                   :rules="[rules.required]"
                   label="Имя"
                 ></v-text-field>
                 <v-text-field
                   filled
-                  v-model="subtitle"
+                  v-model="price"
                   :rules="[rules.required]"
                   type="number"
                   label="Цена"
                   @click:append="show1 = !show1"
                 ></v-text-field>
-                <v-btn
-                  color="blue-grey"
-                  class="ma-2 white--text"
-                  @click="fileUpload"
-                >
-                  Загрузить
-                  <v-icon
-                    right
-                    dark
+                <div class="d-flex justify-space-between">
+                  <v-btn
+                    color="blue-grey"
+                    class="ma-2 white--text"
+                    @click="fileUpload"
                   >
-                    mdi-cloud-upload
-                  </v-icon>
-                </v-btn>
-                <input
-                  type="file"
-                  name="fileUpload"
-                  ref="fileUpload"
-                  accept="image/*"
-                  style="display: none"
-                  @change="onFileChange"
-                >
-                <img src="" height="100px">
-                <v-row>
-                  <v-col
-                    cols="12"
-                    sm="8"
-                    xs="12"
-                    class="ma-auto justify-center"
+                    Загрузить
+                    <v-icon
+                      right
+                      dark
+                    >
+                      mdi-cloud-upload
+                    </v-icon>
+                  </v-btn>
+                  <input
+                    type="file"
+                    name="fileUpload"
+                    ref="fileUpload"
+                    accept="image/*"
+                    style="display: none"
+                    @change="onFileChange"
                   >
-                    <img :src="imgSrc" v-if="imgSrc" class="imageUpload">
-                  </v-col>
-                </v-row>
+                  <img src="" height="100px">
+                  <img :src="imgSrc" v-if="imgSrc" class="imageUpload">
+                </div>
               </div>
               <div class="col-6">
                 <v-textarea
                   filled
-                  v-model="descriptions"
+                  v-model="description"
                   :rules="[rules.required]"
                   type="text"
                   name="input-10-1"
                   label="Описание"
                   @click:append="show1 = !show1"
                 ></v-textarea>
+                <v-btn
+                  class="d-block ml-auto"
+                  color="primary"
+                  :disabled="!valid || !img"
+                  @click="createAd"
+                >
+                  Добавить
+                </v-btn>
               </div>
             </div>
-            <v-btn
-              class="d-block ml-auto"
-              color="primary"
-              :disabled="!valid"
-              @click="createAd"
-            >
-              Добавить
-            </v-btn>
           </v-form>
         </v-col>
       </v-row>
@@ -91,28 +83,28 @@ export default {
     return {
       show1: false,
       valid: false,
-      title: '',
-      show: false,
+      name: '',
       img: null,
       imgSrc: '',
-      subtitle: '',
-      descriptions: '',
+      price: '',
+      description: '',
       rules: {
-        required: value => !!value || 'Required.'
+        required: value => !!value || 'Обязательное поле.'
       }
     }
   },
   methods: {
     createAd () {
       if (this.$refs.form.validate() || this.img) {
-        const ad = {
-          title: this.title,
-          subtitle: this.subtitle,
-          descriptions: this.descriptions,
-          show: this.show,
-          img: this.img
+        const product = {
+          name: this.name,
+          price: this.price,
+          description: this.description,
+          image: '1.jpg',
+          id: Date.now().toString()
         }
-        console.log(ad)
+        this.$store.dispatch('createProduct', product)
+        this.name = this.price = this.description = ''
       }
     },
     fileUpload () {
@@ -134,5 +126,10 @@ export default {
 <style scoped lang="scss">
   .v-textarea textarea{
     height: 192px;
+  }
+  .imageUpload {
+    width: 90px;
+    height: 60px;
+    object-fit: contain;
   }
 </style>
